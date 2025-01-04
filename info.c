@@ -328,18 +328,16 @@ int getServiceName(MESSAGE *message)
  */
 void getEmogis(MESSAGE *message)
 {
-    MESSAGE *temp = message; // Apuntador para recorrer la lista
-
     int i = 0; // contador
     
     char *placeholder; // apuntador que recorrerá la cadena del mensaje
     char b = 0; // mini buffer de un caracter
 
-    placeholder = &temp->start->line[0]; // coloca el apuntador al inicio de la cadena del mensaje
+    placeholder = &message->start->line[0]; // coloca el apuntador al inicio de la cadena del mensaje
 
-    for(i = 0; !startsWithEmojis(placeholder) && temp->start->line[i] != 0; i++) // recorre toda la cadena del mensaje hasta encontrar un emoji
+    for(i = 0; !startsWithEmojis(placeholder) && message->start->line[i] != 0; i++) // recorre toda la cadena del mensaje hasta encontrar un emoji
     {
-        placeholder = &temp->start->line[i];
+        placeholder = &message->start->line[i];
     }
 
     if(startsWithEmojis(placeholder))// si se encontró un emogi
@@ -350,11 +348,11 @@ void getEmogis(MESSAGE *message)
         b = placeholder[i];
         placeholder[i] = 0;
 
-        if(temp->emojis == NULL)
+        if(message->emojis == NULL)
         {
             // guarda los emojis del mensaje
-            temp->emojis = malloc((strlen(placeholder) + 1) * sizeof(char));
-            strcpy(temp->emojis, placeholder);
+            message->emojis = malloc((strlen(placeholder) + 1) * sizeof(char));
+            strcpy(message->emojis, placeholder);
         }
 
         placeholder[i] = b; // regresa la cadena a la normalidad

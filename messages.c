@@ -79,7 +79,7 @@ void treatMessages(COLLECTOR *info)
         getTimestamps(temp); // obtiene las marcas de tiempo del mensaje
         joinLines(&temp->start); // une todas las lineas del mensaje
         getIDs(temp->start->line, &temp->SN, &temp->RSD); // obtiene los IDs que hay en el mensaje
-        getEmogis(info->report_messages); // obtiene los primeros emojis del mensaje
+        getEmogis(temp); // obtiene los primeros emojis del mensaje
 
         name_found = getServiceName(temp); // intenta encontrar el nombre del aplicativo o servicio
 

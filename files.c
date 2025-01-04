@@ -361,7 +361,7 @@ void printAndFree(MESSAGE **start, char *filename)
         }
         else
         {
-            fprintf(fp, "EMOGIS: 'NOT FOUND'");
+            fprintf(fp, "EMOGIS: 'NOT FOUND', ");
         }
 
         fprintf(fp, "TIMESTAMPS: [");
