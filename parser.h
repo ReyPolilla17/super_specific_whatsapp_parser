@@ -99,6 +99,5 @@ int messageIsFromReport(MESSAGE *message, REPORT *report);
 
 /**
  * Funciones que podrpian tener problemas con la memoria
- *      - compressString
  *      - printAndFreeServices
  */

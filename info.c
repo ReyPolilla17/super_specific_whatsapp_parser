@@ -320,46 +320,44 @@ int getServiceName(MESSAGE *message)
 }
 
 /**
- * Obtiene los emogis de todos los mensajes de reportes que se usan para indicar el estatus de un reporte.
+ * Obtiene los emogis de de reportes que se usan para indicar el estatus de un reporte de un mensaje.
  * 
- * @param *start EL inicio de los mensajes de reporte
+ * @param *message El mensaje a operar
  * 
  * @returns void
  */
-void getEmogis(MESSAGE *start)
+void getEmogis(MESSAGE *message)
 {
-    MESSAGE *temp = start; // Apuntador para recorrer la lista
+    MESSAGE *temp = message; // Apuntador para recorrer la lista
 
     int i = 0; // contador
     
     char *placeholder; // apuntador que recorrerá la cadena del mensaje
     char b = 0; // mini buffer de un caracter
 
-    while(temp != NULL) // para todos los mensajes
+    placeholder = &temp->start->line[0]; // coloca el apuntador al inicio de la cadena del mensaje
+
+    for(i = 0; !startsWithEmojis(placeholder) && temp->start->line[i] != 0; i++) // recorre toda la cadena del mensaje hasta encontrar un emoji
     {
-        placeholder = &temp->start->line[0]; // coloca el apuntador al inicio de la cadena del mensaje
+        placeholder = &temp->start->line[i];
+    }
 
-        for(i = 0; !startsWithEmojis(placeholder) && temp->start->line[i] != 0; i++) // recorre toda la cadena del mensaje hasta encontrar un emoji
+    if(startsWithEmojis(placeholder))// si se encontró un emogi
+    {
+        for(i = 0; placeholder[i] != 0 && placeholder[i] < 0; i++); // se recorre hasta donde dejen de haber emogis
+
+        // guarda el último carácter y lo reemplaza por un carácter nulo
+        b = placeholder[i];
+        placeholder[i] = 0;
+
+        if(temp->emojis == NULL)
         {
-            placeholder = &temp->start->line[i];
-        }
-
-        if(startsWithEmojis(placeholder))// si se encontró un emogi
-        {
-            for(i = 0; placeholder[i] != 0 && placeholder[i] < 0; i++); // se recorre hasta donde dejen de haber emogis
-
-            // guarda el último carácter y lo reemplaza por un carácter nulo
-            b = placeholder[i];
-            placeholder[i] = 0;
-
             // guarda los emojis del mensaje
             temp->emojis = malloc((strlen(placeholder) + 1) * sizeof(char));
             strcpy(temp->emojis, placeholder);
-
-            placeholder[i] = b; // regresa la cadena a la normalidad
         }
 
-        temp = temp->next; // se recorre al siguiente mensaje
+        placeholder[i] = b; // regresa la cadena a la normalidad
     }
 
     return;

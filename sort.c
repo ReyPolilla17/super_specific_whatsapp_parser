@@ -57,6 +57,8 @@ void insertIntoServices(SERVICE **start, MESSAGE **message)
     {
         if(!strcmp(compressed_name, temp->compressed_name))
         {
+            insertIntoReports(&temp->reports, message); // inserta el mensaje al reporte correspondiente
+
             free(compressed_name); // libera memoria
             n = 0; // indica que encontró el aplicativo al que pertenece
         }
@@ -75,10 +77,9 @@ void insertIntoServices(SERVICE **start, MESSAGE **message)
 
         new->next = *start;
         *start = new;
-
+        
+        insertIntoReports(&new->reports, message); // inserta el mensaje al reporte correspondiente
     }
-    
-    insertIntoReports(&new->reports, message); // inserta el mensaje al reporte correspondiente
 
     return;
 }
