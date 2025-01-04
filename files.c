@@ -221,7 +221,7 @@ void printAndFreeReports(REPORT **start, char *dirname)
         fp = fopen(filename, "wt"); // abre el archivo
 
         // coloca la información general del reporte obtenida
-        fprintf(fp, "-----------------------------------INFORMACIÓN DEL REPORTE-----------------------------------\n");
+        fprintf(fp, "-------------------------------------------INFORMACIÓN DEL INCIDENTE------------------------------------------\n");
 
         // si existe el dato, lo imprime y libera memoria, de lo contrario, imprime no encontrado
         // información que imprime: SN, RSD, Inicio del incidente, Reporte del incidente, Recuperación del incidente
@@ -275,7 +275,7 @@ void printAndFreeReports(REPORT **start, char *dirname)
             fprintf(fp, "RECUPERACIÓN: 'NOT FOUND'\n");
         }
 
-        fprintf(fp, "-----------------------------------REPORTES-----------------------------------\n");
+        fprintf(fp, "----------------------------------------------------REPORTES--------------------------------------------------\n");
 
         fclose(fp); // cierra el archivo
 
@@ -410,7 +410,7 @@ void printAndFree(MESSAGE **start, char *filename)
             free(temp_l);
         }
 
-        fprintf(fp, "------------------------------------------------------------------------------------------------------------\n");
+        fprintf(fp, "--------------------------------------------------------------------------------------------------------------\n");
         
         *start = temp_m->next; // se recorre al siguiente mensaje
         
