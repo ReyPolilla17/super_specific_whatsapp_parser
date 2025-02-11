@@ -252,7 +252,7 @@ void printAndFreeReports(REPORT **start, char *dirname)
         }
         else
         {
-            fprintf(fp, "'INICIO: NOT FOUND'\n");
+            fprintf(fp, "INICIO: 'NOT FOUND'\n");
         }
 
         if(temp->r_report != NULL)
@@ -423,4 +423,3 @@ void printAndFree(MESSAGE **start, char *filename)
     
     return;
 }
-
